@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: white;
+    background-color: black;
+}
+
+.infoArea {
+    display: flex;
+    flex-direction: column;
+    padding: 32px 0;
+    gap: 16px;
+    text-align: center;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.pageContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+}
+
+
+#gridContainer {
+    /* display: flex; */
+    display: grid;
+    
+    /* flex-wrap: wrap;
+    justify-content: center;
+    align-items: center; */
+    /* background-color: red; */
+    /* width:90%; */
+}
