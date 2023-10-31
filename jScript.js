@@ -1,9 +1,15 @@
+// user input
 let gridSetBtn = document.querySelector('.gridSizeBtn');
 let usrInput = document.querySelector('.usrGridInput');
 let inputArea = document.querySelector('.inputDiv');
 
 usrInput.focus();
 
+let resetBtn = document.querySelector('.resetBtn');
+let resetBtnArea = document.querySelector('.resetBtnArea');
+// resetBtnArea.style.display = 'flex';
+
+//grid area
 let gridSize;
 let container = document.querySelector('#gridContainer');
 let containerStyle = window.getComputedStyle(container);
@@ -17,17 +23,16 @@ let parentValue = parentWidth < parentHeight ? parentWidth : parentHeight;
 let containerWidth = parentValue / 100 * 90;
 container.style.width = `${containerWidth}`;
 
-
-
-
 // ***** Next: reset button that refreshes the page (appears top right when grid created)
-// ***** squares get darker in colour / lighter in colour when hovered over.
 
 gridSetBtn.addEventListener('click', () => {
+    resetBtnArea.style.display = 'flex';
     //get user input and create grid
-    let gridSize = usrInput.value;  
-    usrInput.value = '';
+    
+    usrInput.value = '';    
     getGridsize(gridSize);
+    resetBtnArea.style.display = 'flex';
+    
 
 })
 //Works when enter is pressed too
@@ -36,10 +41,13 @@ usrInput.addEventListener('keyup',function(e){
         let gridSize = usrInput.value;  
         usrInput.value = '';
         getGridsize(gridSize);  
+        resetBtnArea.style.display = 'flex';
   }  
 });
 
 function getGridsize (gridSize) {
+    
+
     if (parseInt(gridSize, 10) > 0 && parseInt(gridSize, 10) <= 100 ) {
         makeGrid(gridSize);    
         container.style.gridTemplateRows = `repeat(${gridSize}, 1fr`;
@@ -56,26 +64,21 @@ function getGridsize (gridSize) {
     }
 }
 
-// const myTimeout = setTimeout(hoverColor(gridcell), 1000);
-
 function hoverColor (gridCell) {
              
         gridCell.forEach(cell => {
                 cell.addEventListener('mouseover' , () => {
-                    //here???
                     colRepeater = setInterval(darkenCell, 10);
 
                     function darkenCell() { 
                         let currentBGColor = cell.style.backgroundColor;
-                        // console.log(currentBGColor);
+                        
                         if (currentBGColor === 'rgb(255,255,255)') {
                         cell.style.backgroundColor = 'rgb(200,200,200)';
                         } else { 
                             cellRGB = parseInt(currentBGColor.slice(4,7), 10);
-                            // console.log(cellRGB);
-                            // console.log(currentBGColor);
-                            newCellRGB = cellRGB - 15;
-                            
+                          
+                            newCellRGB = cellRGB - 15;                            
                             cell.style.backgroundColor = `rgb(${newCellRGB},${newCellRGB},${newCellRGB})`;
                         }
         }})})
@@ -108,6 +111,10 @@ function makeGrid (num) {
 
     }
 }
+
+resetBtn.addEventListener('click', () => {
+    location.reload(); // refresh page
+})
 
 
 

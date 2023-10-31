@@ -5,13 +5,26 @@
     background-color: black;
 }
 
+.titleArea {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.resetBtnArea {
+    display:none;
+    position:absolute;
+    top:auto;
+    right: -75px;
+    align-self: center;
+}
 .infoArea {
     display: flex;
     flex-direction: column;
     padding: 16px 0;
     gap: 16px;
     text-align: center;
-    font-family:'Courier New', Courier, monospace;
+
 }
 
 .pageContainer {
@@ -24,12 +37,19 @@
 
 
 #gridContainer {
-    /* display: flex; */
     display: grid;
-    
-    /* flex-wrap: wrap;
-    justify-content: center;
-    align-items: center; */
-    /* background-color: red; */
-    /* width:90%; */
+}
+button {
+    padding: 3px;
+    border-radius: 5px;
+    font-weight: 550;
+}
+label {
+    font-weight: 550;
+    font-size: 16px;
+}
+input{
+    padding: 3px;
+    border-radius: 5px;
+    background-color:darkslategray;
 }
