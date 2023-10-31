@@ -16,8 +16,8 @@ let gridSetBtn = document.querySelector('.gridSizeBtn');
 let usrInput = document.querySelector('.usrGridInput');
 let inputArea = document.querySelector('.inputDiv');
 
-
-
+// ***** Next: reset button that refreshes the page (appears top right when grid created)
+// ***** squares get darker in colour / lighter in colour when hovered over.
 
 gridSetBtn.addEventListener('click', () => {
     //get user input and create grid
@@ -52,11 +52,22 @@ function getGridsize (gridSize) {
 }
 
 
-function hoverColor (gridCell) {gridCell.forEach(cell => {
+function hoverColor (gridCell) {
+    gridCell.forEach(cell => {
         cell.addEventListener('mouseover' , () => {
-            cell.style.backgroundColor = 'red';
-        })
-    })
+            let currentBGColor = cell.style.backgroundColor;
+            // console.log(currentBGColor);
+            if (currentBGColor === 'rgb(255,255,255)') {
+            cell.style.backgroundColor = 'rgb(200,200,200)';
+            } else { 
+                cellRGB = parseInt(currentBGColor.slice(4,7), 10);
+                // console.log(cellRGB);
+                // console.log(currentBGColor);
+                newCellRGB = cellRGB - 25;
+                
+                cell.style.backgroundColor = `rgb(${newCellRGB},${newCellRGB},${newCellRGB})`;
+            }
+        })})
 }
 
 // create  grid based on desired amount of cells. Cell size determined by sixe of both screen and grid container div.
@@ -72,9 +83,9 @@ function makeGrid (num) {
 
         divGrid.style.width = `${cellWidth}px`;
         divGrid.style.height = `${cellWidth}px`;
-        divGrid.style.backgroundColor = `black`;
+        divGrid.style.backgroundColor = `rgb(255,255,255)`;
         divGrid.style.boxSizing = `border-box`;
-        divGrid.style.border = `1px solid white`;
+        divGrid.style.border = `1px solid darkgray`;
         container.style.padding = `${cellWidth / 2}px 0`;
 
         container.appendChild(divGrid);
