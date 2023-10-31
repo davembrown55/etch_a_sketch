@@ -26,12 +26,10 @@ container.style.width = `${containerWidth}`;
 // ***** Next: reset button that refreshes the page (appears top right when grid created)
 
 gridSetBtn.addEventListener('click', () => {
-    resetBtnArea.style.display = 'flex';
     //get user input and create grid
-    
+    let gridSize = usrInput.value; 
     usrInput.value = '';    
     getGridsize(gridSize);
-    resetBtnArea.style.display = 'flex';
     
 
 })
@@ -41,7 +39,6 @@ usrInput.addEventListener('keyup',function(e){
         let gridSize = usrInput.value;  
         usrInput.value = '';
         getGridsize(gridSize);  
-        resetBtnArea.style.display = 'flex';
   }  
 });
 
@@ -49,14 +46,13 @@ function getGridsize (gridSize) {
     
 
     if (parseInt(gridSize, 10) > 0 && parseInt(gridSize, 10) <= 100 ) {
+        resetBtnArea.style.display = 'flex';
         makeGrid(gridSize);    
         container.style.gridTemplateRows = `repeat(${gridSize}, 1fr`;
         container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr`;
         // execute hover functionality
         let gridCell = document.querySelectorAll('.gridCell');
-        hoverColor(gridCell);
-        
-
+        hoverColor(gridCell);      
         inputArea.style.display = 'none';
     } else {
         alert('Please enter a number between 0 & 100');
