@@ -1,4 +1,4 @@
-// user input
+// user input for grid size
 let gridSetBtn = document.querySelector('.gridSizeBtn');
 let usrInput = document.querySelector('.usrGridInput');
 let inputArea = document.querySelector('.inputDiv');
@@ -7,23 +7,18 @@ usrInput.focus();
 
 let resetBtn = document.querySelector('.resetBtn');
 let resetBtnArea = document.querySelector('.resetBtnArea');
-// resetBtnArea.style.display = 'flex';
 
 //grid area
 let gridSize;
 let container = document.querySelector('#gridContainer');
 let containerStyle = window.getComputedStyle(container);
-
-
 let parentWidth = window.innerWidth; // Width of the window (parent of container)
-let parentHeight = window.innerHeight; // height of the window (parent of container)
+let parentHeight = window.innerHeight; // height of the window 
 
 // Set gridContainer width to either 90% of screen height, or width. Depending on which is smaller, so that grid always fits on screen
 let parentValue = parentWidth < parentHeight ? parentWidth : parentHeight;
 let containerWidth = parentValue / 100 * 90;
 container.style.width = `${containerWidth}`;
-
-// ***** Next: reset button that refreshes the page (appears top right when grid created)
 
 gridSetBtn.addEventListener('click', () => {
     //get user input and create grid
@@ -42,15 +37,14 @@ usrInput.addEventListener('keyup',function(e){
   }  
 });
 
-function getGridsize (gridSize) {
-    
+function getGridsize (gridSize) {   
 
-    if (parseInt(gridSize, 10) > 0 && parseInt(gridSize, 10) <= 100 ) {
+    if (parseInt(gridSize, 10) > 0 && parseInt(gridSize, 10) <= 100 ) { // validation
         resetBtnArea.style.display = 'flex';
         makeGrid(gridSize);    
         container.style.gridTemplateRows = `repeat(${gridSize}, 1fr`;
         container.style.gridTemplateColumns = `repeat(${gridSize}, 1fr`;
-        // execute hover functionality
+        // mouseover functionality
         let gridCell = document.querySelectorAll('.gridCell');
         hoverColor(gridCell);      
         inputArea.style.display = 'none';
@@ -60,32 +54,6 @@ function getGridsize (gridSize) {
     }
 }
 
-function hoverColor (gridCell) {
-             
-        gridCell.forEach(cell => {
-                cell.addEventListener('mouseover' , () => {
-                    colRepeater = setInterval(darkenCell, 10);
-
-                    function darkenCell() { 
-                        let currentBGColor = cell.style.backgroundColor;
-                        
-                        if (currentBGColor === 'rgb(255,255,255)') {
-                        cell.style.backgroundColor = 'rgb(200,200,200)';
-                        } else { 
-                            cellRGB = parseInt(currentBGColor.slice(4,7), 10);
-                          
-                            newCellRGB = cellRGB - 15;                            
-                            cell.style.backgroundColor = `rgb(${newCellRGB},${newCellRGB},${newCellRGB})`;
-                        }
-        }})})
-        gridCell.forEach(cell => {
-            cell.addEventListener('mouseout' , () => {
-                clearInterval(colRepeater);
-        }) })
-    
-}
-
-// create  grid based on desired amount of cells. Cell size determined by sixe of both screen and grid container div.
 function makeGrid (num) {
     let fullGrid = num * num;
 
@@ -106,6 +74,30 @@ function makeGrid (num) {
         container.appendChild(divGrid);
 
     }
+}
+
+function hoverColor (gridCell) {
+    gridCell.forEach(cell => {
+            cell.addEventListener('mouseover' , () => {
+                cellRepeater = setInterval(darkenCell, 15);
+
+                function darkenCell() { 
+                    let currentBGColor = cell.style.backgroundColor;
+                    
+                    if (currentBGColor === 'rgb(255,255,255)') {
+                    cell.style.backgroundColor = 'rgb(220,220,220)';
+                    } else { 
+                        cellRGB = parseInt(currentBGColor.slice(4,7), 10);
+                      
+                        newCellRGB = cellRGB - 13;                            
+                        cell.style.backgroundColor = `rgb(${newCellRGB},${newCellRGB},${newCellRGB})`;
+                    }
+    }})})
+    gridCell.forEach(cell => {
+        cell.addEventListener('mouseout' , () => {
+            clearInterval(cellRepeater);
+    }) })
+
 }
 
 resetBtn.addEventListener('click', () => {
